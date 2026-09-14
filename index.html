@@ -56,16 +56,21 @@ It calculates expected statistical numbers from gear, mods and set bonuses. It d
 
 <h2>Current</h2>
 
-<a class="card current" href="SHD_Builder_beta_0.4.0.html">
+<a class="card current" href="SHD_Builder_beta_0.4.1.html">
   <div class="top">
-    <span class="v">v0.4.0 beta</span>
+    <span class="v">v0.4.1 beta</span>
     <span class="badge now">Current — test this one</span>
-    <span class="date">11 Sep 2026</span>
+    <span class="date">14 Sep 2026</span>
   </div>
   <div class="desc">
-    Equipped sets panel with full bonus text. Per node SHD Watch, all 16 nodes.
-    Per stat source attribution, click any stat to see where every point came from.
-    Hazard breakdown across all eight status effect types. Versioned build codes.
+    Gear data moved out of the app into a separate file, generated from a master
+    spreadsheet with validation checks. Fixes Česká Výroba pieces showing no core
+    attribute, which was live in 0.4.0.
+  </div>
+  <div class="flag">
+    This version must be opened from this page or the link above. It loads its data from a
+    separate file, and browsers block that when a page is opened directly from your computer.
+    Saving it and double clicking will not work. Archived versions below still do.
   </div>
 </a>
 
@@ -77,7 +82,24 @@ It calculates expected statistical numbers from gear, mods and set bonuses. It d
   behave. Known issues in each are noted below so you know what you are looking at.
 </div>
 
-<a class="card old" href="SHD_Builder_beta_v0.0.1.html">
+<a class="card old" href="archive/SHD_Builder_beta_0.4.0.html">
+  <div class="top">
+    <span class="v">v0.4.0 beta</span>
+    <span class="badge">Superseded</span>
+    <span class="date">11 Sep 2026</span>
+  </div>
+  <div class="desc">
+    Equipped sets panel with full bonus text. Per node SHD Watch, all 16 nodes.
+    Per stat source attribution, click any stat to see where every point came from.
+    Hazard breakdown across all eight status effect types. Versioned build codes.
+  </div>
+  <div class="flag">
+    Known issue: Česká Výroba pieces show no core attribute. The brand name carries accents
+    and the internal mapping did not match. Fixed in 0.4.1.
+  </div>
+</a>
+
+<a class="card old" href="archive/SHD_Builder_beta_v0.0.1.html">
   <div class="top">
     <span class="v">v0.0.1 beta</span>
     <span class="badge">Superseded</span>
@@ -93,25 +115,15 @@ It calculates expected statistical numbers from gear, mods and set bonuses. It d
   </div>
 </a>
 
-<a class="card old" href="SHD_Builder.html">
-  <div class="top">
-    <span class="v">Initial build</span>
-    <span class="badge">Superseded</span>
-    <span class="date">9 Sep 2026</span>
-  </div>
-  <div class="desc">
-    First working version, kept for reference only.
-  </div>
-  <div class="flag">
-    Same flat and percentage issue as above, and predates several data corrections.
-  </div>
-</a>
 
-<h2>Known gaps in 0.4.0</h2>
+
+<h2>Known gaps in 0.4.1</h2>
 <div class="box">
   These are missing or incomplete on purpose, not broken. Worth reading before reporting.
   <ul>
-    <li><strong>Weapons, skills, named and exotic gear</strong> are not in the tool yet.</li>
+    <li><strong>Weapons, skills, named and exotic gear</strong> are not in the tool yet. Weapons are next.</li>
+    <li><strong>Specializations</strong> carry two placeholder values only. The system has nuances
+      being worked through before it is modelled.</li>
     <li><strong>Gear set attribute rolls</strong> are understated for 10 of 12 attributes. Only Crit Hit
       Chance and Crit Hit Damage have measured gear set values.</li>
     <li><strong>Ensnare and Shock resistance</strong> show <code>n/a</code> rather than <code>0</code>.
