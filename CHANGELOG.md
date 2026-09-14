@@ -14,6 +14,14 @@ This tool calculates expected statistical totals from gear, mods and set bonuses
 
 ---
 
+## v0.6.1 beta — 14 September 2026
+
+**Fixed**
+- **The settings panel would not close.** The Close button, the backdrop and Escape all set the panel to hidden, but a stylesheet rule was overriding that, so it stayed on screen. It was also showing on page load rather than staying shut.
+- **The weapon pool showed every specialization's mod unlock at once.** Pick Technician and it listed Firewall's Tactical Short Grip, Gunner's Large Pouch and the rest alongside your own. Each specialization now shows only its own, on the one node that gates it, and the note beneath names which of your three picks it costs you.
+
+---
+
 ## v0.6.0 beta — 14 September 2026
 
 **Settings panel**

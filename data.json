@@ -1,5 +1,5 @@
 {
- "schema": 3,
+ "schema": 4,
  "generated": "2026-09-14",
  "source": "Division2_Master_Data.xlsx (authoritative)",
  "data": {
@@ -1816,8 +1816,9 @@
      "per": 5.0,
      "tiers": 3,
      "cost": 5.0,
-     "gates": "Survivalist",
-     "mod": "Infantry 5.56 Mag"
+     "gates": {
+      "Survivalist": "Infantry 5.56 Mag"
+     }
     },
     {
      "node": "Spray and Pray",
@@ -1825,8 +1826,9 @@
      "per": 5.0,
      "tiers": 3,
      "cost": 5.0,
-     "gates": "Demolitionist",
-     "mod": "Small Laser Pointer"
+     "gates": {
+      "Demolitionist": "Small Laser Pointer"
+     }
     },
     {
      "node": "Running The Gun",
@@ -1834,8 +1836,9 @@
      "per": 5.0,
      "tiers": 3,
      "cost": 5.0,
-     "gates": "Firewall",
-     "mod": "Tactical Short Grip"
+     "gates": {
+      "Firewall": "Tactical Short Grip"
+     }
     },
     {
      "node": "This Is My Rifle",
@@ -1843,8 +1846,10 @@
      "per": 5.0,
      "tiers": 3,
      "cost": 5.0,
-     "gates": "Technician, Sharpshooter",
-     "mod": "Linked Laser Pointer / Digital Scope"
+     "gates": {
+      "Technician": "Linked Laser Pointer",
+      "Sharpshooter": "Digital Scope"
+     }
     },
     {
      "node": "Depleted Rounds",
@@ -1852,8 +1857,7 @@
      "per": 5.0,
      "tiers": 3,
      "cost": 5.0,
-     "gates": "",
-     "mod": ""
+     "gates": {}
     },
     {
      "node": "Onslaught",
@@ -1861,8 +1865,9 @@
      "per": 5.0,
      "tiers": 3,
      "cost": 5.0,
-     "gates": "Gunner",
-     "mod": "Large Pouch"
+     "gates": {
+      "Gunner": "Large Pouch"
+     }
     },
     {
      "node": "Gunslinger",
@@ -1870,8 +1875,7 @@
      "per": 5.0,
      "tiers": 3,
      "cost": 5.0,
-     "gates": "",
-     "mod": ""
+     "gates": {}
     }
    ]
   },

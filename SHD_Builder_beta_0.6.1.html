@@ -306,7 +306,7 @@ Anything not yet captured is marked rather than estimated.</p>
 <script>
 const VERSION = "0.6.1";
 const BUILD_CODE_FORMAT = 3;   // 3 = specialization weapon pool added. Bump ONLY when the saved state shape changes
-const DATA_SCHEMA = 3;         // bump when the shape of data.json changes
+const DATA_SCHEMA = 4;         // bump when the shape of data.json changes
 let DATA = null;               // loaded from data.json at startup
 
 const KIND = ["Empty","Brand Set","Gear Set","Improvised"];
@@ -760,18 +760,21 @@ function renderSpecPool(){
       if(delta>left){ return; }
       specTiers[n.node]=t;
     }));
-    if(n.gates && cur===n.tiers)
-      row.append(el("span",{className:"punlock",textContent:"unlocks "+n.mod}));
-    else if(n.gates)
-      row.append(el("span",{className:"pgate",textContent:"max unlocks "+n.mod}));
+    const mod = n.gates ? n.gates[spec] : null;   // this specialization only
+    if(mod && cur===n.tiers)
+      row.append(el("span",{className:"punlock",textContent:"unlocks "+mod}));
+    else if(mod)
+      row.append(el("span",{className:"pgate",textContent:"max unlocks "+mod}));
     else row.append(el("span",{}));
     box.append(row);
   });
   host.append(box);
-  const n=P.nodes.length;
-  host.append(el("div",{className:"wnote",textContent:
+  const gate=P.nodes.find(n=>n.gates&&n.gates[spec]);
+  host.append(el("div",{className:"wnote",innerHTML:
     `${P.budget} points at ${cost} per tier is ${P.budget/cost} tiers — exactly three nodes at maximum. `+
-    `These apply only while a matching weapon is Equipped, the same as a brand's weapon type bonus.`}));
+    `These apply only while a matching weapon is Equipped, the same as a brand's weapon type bonus.`+
+    (gate? `<br><b>${spec}</b> unlocks <b>${gate.gates[spec]}</b> by maxing ${gate.node} (${gate.cat}), `+
+           `so taking that mod decides one of your three picks.` : "")}));
 }
 
 function renderWeapons(){
