@@ -1,0 +1,728 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>SHD Loadout Bench — The Division 2 build planner</title>
+<style>
+:root{
+  --bg:#12171C; --panel:#1A2027; --panel2:#222A32; --line:#2E3944;
+  --ink:#DFE6ED; --dim:#8899A8; --faint:#5E6E7D;
+  --red:#D65A4A; --blue:#4E9BD6; --yellow:#E8C13D;
+  --gold:#D9A441; --exotic:#E8623D; --named:#A87BD6; --brand:#6FA8CE;
+  --ok:#5FB98B; --warn:#E0B341; --bad:#D65A4A;
+  --r:3px;
+}
+*{box-sizing:border-box}
+html,body{margin:0;background:var(--bg);color:var(--ink);
+  font-family:"Barlow Semi Condensed","Roboto Condensed","Segoe UI",system-ui,sans-serif;
+  font-size:15px;line-height:1.45;-webkit-font-smoothing:antialiased}
+body{font-variant-numeric:tabular-nums}
+h1,h2,h3{font-weight:600;margin:0;letter-spacing:.01em}
+a{color:var(--blue)}
+
+header{border-bottom:1px solid var(--line);background:linear-gradient(180deg,#1A2128,#12171C);
+  padding:14px 20px;display:flex;gap:16px;align-items:baseline;flex-wrap:wrap;position:relative}
+header:after{content:"";position:absolute;left:0;right:0;bottom:-1px;height:1px;
+  background:linear-gradient(90deg,var(--yellow),transparent 45%)}
+header h1{font-size:20px}
+header .sub{color:var(--dim);font-size:13px}
+header .ver{font-size:12px;color:var(--yellow);border:1px solid var(--line);
+  border-radius:10px;padding:1px 8px;align-self:center}
+header .tools{margin-left:auto;display:flex;gap:8px}
+
+button,select,input{font:inherit;color:var(--ink);background:var(--panel2);
+  border:1px solid var(--line);border-radius:var(--r);padding:5px 8px}
+button{cursor:pointer}
+button:hover{border-color:var(--yellow)}
+select:focus-visible,button:focus-visible,input:focus-visible{outline:2px solid var(--yellow);outline-offset:1px}
+
+.wrap{display:grid;grid-template-columns:minmax(0,1fr) 380px;gap:18px;padding:18px 20px 60px;
+  max-width:1500px;margin:0 auto;align-items:start}
+@media (max-width:1000px){.wrap{grid-template-columns:1fr}}
+
+section.card{background:var(--panel);border:1px solid var(--line);border-radius:var(--r);margin-bottom:16px}
+section.card > h2{font-size:13px;color:var(--dim);padding:9px 12px;border-bottom:1px solid var(--line);
+  font-weight:600}
+
+/* gear slot rows */
+.slot{border-bottom:1px solid var(--line);padding:10px 12px;display:grid;
+  grid-template-columns:96px minmax(0,1fr);gap:10px;align-items:start}
+.slot:last-child{border-bottom:0}
+.slotname{font-size:13px;color:var(--dim);padding-top:6px;border-left:2px solid var(--line);padding-left:8px}
+.slot[data-kind="Gear Set"] .slotname{border-left-color:var(--gold)}
+.slot[data-kind="Brand Set"] .slotname{border-left-color:var(--brand)}
+.slot[data-kind="Named"] .slotname{border-left-color:var(--named)}
+.slot[data-kind="Exotic"] .slotname{border-left-color:var(--exotic)}
+.slot[data-kind="Improvised"] .slotname{border-left-color:var(--faint)}
+.row{display:flex;flex-wrap:wrap;gap:6px;align-items:center;margin-bottom:6px}
+.row:last-child{margin-bottom:0}
+.row select{min-width:0}
+.tag{font-size:12px;color:var(--faint);padding:3px 0}
+.core-w{color:var(--red)} .core-a{color:var(--blue)} .core-s{color:var(--yellow)}
+.pip{display:inline-block;width:8px;height:8px;border-radius:50%;vertical-align:middle;margin-right:5px}
+
+/* readout */
+aside{position:sticky;top:14px}
+.stat{display:flex;justify-content:space-between;gap:10px;padding:3px 12px;font-size:14px}
+.stat:nth-child(odd){background:rgba(255,255,255,.018)}
+.stat b{font-weight:600}
+.grp{font-size:11px;color:var(--faint);padding:9px 12px 3px;border-top:1px solid var(--line);margin-top:2px}
+.bar{height:3px;background:var(--panel2);border-radius:2px;overflow:hidden;margin:0 12px 6px}
+.bar i{display:block;height:100%;background:var(--ok)}
+.bar.over i{background:var(--warn)}
+.note{font-size:12.5px;color:var(--dim);padding:6px 12px;border-top:1px solid var(--line)}
+.note.warn{color:var(--warn)} .note.bad{color:var(--bad)}
+.effect{font-size:12.5px;padding:7px 12px;border-bottom:1px solid var(--line);color:var(--dim)}
+.effect strong{color:var(--ink);font-weight:600}
+.empty{padding:12px;color:var(--faint);font-size:13px}
+.pillrow{display:flex;flex-wrap:wrap;gap:6px;padding:10px 12px}
+.pill{font-size:12px;border:1px solid var(--line);border-radius:10px;padding:2px 9px;color:var(--dim)}
+.pill.on{border-color:var(--gold);color:var(--gold)}
+.pill.br{border-color:var(--brand);color:var(--brand)}
+.setblock{border-bottom:1px solid var(--line);padding:9px 12px}
+.setblock:last-child{border-bottom:0}
+.sethead{display:flex;justify-content:space-between;gap:10px;align-items:baseline;
+  padding-bottom:5px;margin-bottom:5px;border-bottom:1px solid var(--line)}
+.setname{font-weight:600;font-size:14.5px}
+.setblock.set .setname{color:var(--gold)}
+.setblock.brand .setname{color:var(--brand)}
+.setcount{font-size:12px;color:var(--faint);white-space:nowrap}
+.setover{font-size:12.5px;color:var(--warn);padding-bottom:5px}
+.tier{display:grid;grid-template-columns:74px minmax(0,1fr);gap:9px;padding:3px 0;
+  font-size:13.5px;color:var(--faint)}
+.tier.on{color:var(--ink)}
+.tiertag{color:var(--faint);font-size:12px;padding-top:1px}
+.tier.on .tiertag{color:var(--yellow);font-weight:600}
+.tier.talent .tiertext{font-size:13px}
+.tiertext{min-width:0}
+@media (max-width:560px){.tier{grid-template-columns:1fr}.tiertag{padding-top:4px}}
+.boot{padding:40px 20px;color:var(--dim);font-size:15px;text-align:center}
+.fatal{max-width:640px;margin:0 auto;text-align:left;background:var(--panel);
+  border:1px solid var(--bad);border-left:3px solid var(--bad);border-radius:3px;padding:16px 18px}
+.fatal h3{color:var(--bad);font-size:16px;margin:0 0 8px}
+.fatal p{margin:0 0 10px;color:var(--ink);font-size:14.5px;line-height:1.5}
+.fatal code{display:block;background:var(--bg);border:1px solid var(--line);border-radius:3px;
+  padding:7px 9px;font-size:12.5px;color:var(--faint);overflow-wrap:anywhere}
+.mini{padding:2px 8px;font-size:12.5px}
+.quad{border-bottom:1px solid var(--line);padding:8px 12px}
+.quad:last-child{border-bottom:0}
+.quadname{font-size:11px;color:var(--faint);margin-bottom:4px}
+.node{display:grid;grid-template-columns:132px minmax(60px,1fr) 54px 58px;gap:8px;
+  align-items:center;padding:2px 0;font-size:13.5px}
+.node.zero .nodename,.node.zero .nodeval{color:var(--faint)}
+.nodename{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.nodeval{text-align:right;font-weight:600}
+.num{padding:2px 4px;width:100%;text-align:right}
+.slider{-webkit-appearance:none;appearance:none;width:100%;height:4px;padding:0;
+  background:var(--panel2);border:0;border-radius:2px;cursor:pointer}
+.slider::-webkit-slider-thumb{-webkit-appearance:none;width:13px;height:13px;border-radius:50%;
+  background:var(--yellow);cursor:pointer}
+.slider::-moz-range-thumb{width:13px;height:13px;border:0;border-radius:50%;background:var(--yellow);cursor:pointer}
+.slider:focus-visible{outline:2px solid var(--yellow);outline-offset:2px}
+@media (max-width:560px){.node{grid-template-columns:1fr 54px 58px}
+  .node .slider{grid-column:1/-1;order:3}}
+.stat.clickable{cursor:pointer;user-select:none}
+.stat.clickable:hover{background:rgba(232,193,61,.07)}
+.stat.clickable:focus-visible{outline:2px solid var(--yellow);outline-offset:-2px}
+.caret{font-style:normal;color:var(--faint);display:inline-block;width:12px;font-size:10px}
+.stat.open .caret{color:var(--yellow)}
+.seg{display:flex;height:3px;margin:0 12px 3px 36px;border-radius:2px;overflow:hidden;
+  background:var(--panel2)}
+.seg i{display:block;height:100%}
+.srcbox{padding:4px 12px 8px 36px;background:rgba(0,0,0,.22);
+  border-left:2px solid var(--yellow);margin:0 12px 6px}
+.srcline{display:flex;align-items:baseline;gap:7px;font-size:13px;padding:2px 0;color:var(--dim)}
+.srcline span{flex:1;min-width:0}
+.srcline b{color:var(--ink);font-weight:600}
+.srcfoot{font-size:11px;color:var(--faint);padding-top:4px}
+.dot{display:inline-block;width:8px;height:8px;border-radius:2px;flex:none}
+.legend{display:flex;flex-wrap:wrap;gap:4px 12px;padding:9px 12px;
+  border-bottom:1px solid var(--line);font-size:11.5px;color:var(--dim)}
+.lg{display:flex;align-items:center;gap:5px}
+.c-core{background:var(--red)} .c-attr{background:var(--ink)}
+.c-mod{background:var(--named)} .c-brand{background:var(--brand)}
+.c-set{background:var(--gold)} .c-shd{background:var(--ok)}
+.c-spec{background:var(--exotic)} .c-other{background:var(--faint)}
+.haz{display:grid;grid-template-columns:minmax(0,1fr) 62px 62px 62px;gap:4px;
+  padding:3px 12px;font-size:13.5px;align-items:baseline}
+.haz:nth-child(odd){background:rgba(255,255,255,.018)}
+.haz span:not(:first-child){text-align:right}
+.haz.head{color:var(--faint);font-size:11px;border-bottom:1px solid var(--line);padding-bottom:5px}
+.haz b{font-weight:600}
+.haz.none span:first-child{color:var(--faint)}
+.haz .gap{color:var(--faint)}
+.foot{padding:10px 20px;color:var(--faint);font-size:12px;max-width:1500px;margin:0 auto}
+</style>
+</head>
+<body>
+<header>
+  <h1>SHD Loadout Bench</h1>
+  <span class="ver" id="ver"></span>
+  <span class="sub">The Division 2 build planner · stat aggregation, set bonuses, caps</span>
+  <span class="tools">
+    <button id="copy">Copy build code</button>
+    <button id="load">Load build code</button>
+    <button id="reset">Clear loadout</button>
+  </span>
+</header>
+
+<div id="boot" class="boot">Loading gear data…</div>
+
+<div class="wrap" id="app" hidden>
+  <main>
+    <section class="card"><h2>Gear</h2><div id="gear"></div></section>
+    <section class="card"><h2>Character</h2>
+      <div class="slot"><div class="slotname">Specialization</div>
+        <div class="row"><select id="spec"></select></div>
+      </div>
+      <div class="slot"><div class="slotname">Base values</div>
+        <div class="row">
+          <label class="tag">Skill cooldown <input id="cd" type="number" value="60" step="1" style="width:64px"> s</label>
+          <label class="tag">Skill duration <input id="dur" type="number" value="30" step="1" style="width:64px"> s</label>
+          <label class="tag">Reload <input id="rl" type="number" value="2.8" step="0.1" style="width:64px"> s</label>
+        </div>
+      </div>
+    </section>
+    <section class="card">
+      <h2>SHD Watch</h2>
+      <div class="row" style="padding:9px 12px;border-bottom:1px solid var(--line);gap:8px">
+        <label class="tag"><input type="checkbox" id="shd" checked> Apply SHD Watch</label>
+        <span style="flex:1"></span>
+        <button id="shdmax" class="mini">Max all</button>
+        <button id="shdclear" class="mini">Clear all</button>
+        <span class="tag" id="shdtotal"></span>
+      </div>
+      <div id="shdpanel"></div>
+    </section>
+    <section class="card"><h2>Equipped sets</h2><div id="counts"></div></section>
+  </main>
+
+  <aside>
+    <section class="card"><h2>Readout</h2><div id="out"></div></section>
+    <section class="card">
+      <h2>Hazard breakdown</h2>
+      <div class="row" style="padding:8px 12px;border-bottom:1px solid var(--line)">
+        <label class="tag">Stacking model
+          <select id="hazmodel" style="margin-left:6px">
+            <option value="add">Additive (sum)</option>
+            <option value="mult">Multiplicative (diminishing)</option>
+          </select>
+        </label>
+      </div>
+      <div id="hazard"></div>
+    </section>
+  </aside>
+</div>
+
+<p class="foot"><span id="datameta"></span><br>Build codes carry the version that made them. A code from an older version still loads, with anything added since left at its default.<br>Values come from the project catalogue (DJ in game captures, Y8S3 live, Sep 2026). Gear set single rolls
+use the observed 1.5x brand multiplier on crit stats only; other attributes are shown at the brand pool value pending capture.
+Anything not yet captured is marked rather than estimated.</p>
+
+<script>
+const VERSION = "0.4.1";
+const BUILD_CODE_FORMAT = 1;   // bump ONLY when the saved state shape changes
+const DATA_SCHEMA = 1;         // bump when the shape of data.json changes
+let DATA = null;               // loaded from data.json at startup
+
+const KIND = ["Empty","Brand Set","Gear Set","Improvised"];
+const CORE_LABEL = {weapon:["Weapon Damage",15,"core-w"],armor:["Armor",170001,"core-a"],skill:["Skill Tier",1,"core-s"]};
+// observed gear-set single-roll uplift, crit stats only (VERIFIED_MECHANICS 1.3)
+const GS_UPLIFT = {"Critical Hit Chance":9.0,"Critical Hit Damage":18.0};
+
+const HAZARDS = [
+  ["Bleed","Bleed Resistance",true],
+  ["Blind / Deaf","Blind/Deaf Resistance",true],
+  ["Burn","Burn Resistance",true],
+  ["Disorient","Disorient Resistance",true],
+  ["Disrupt","Disrupt Resistance",true],
+  ["Ensnare","Ensnare Resistance",false],
+  ["Pulse","Pulse Resistance",true],
+  ["Shock","Shock Resistance",false],
+];
+let hazModel="add";
+const openStats=new Set();
+const FLAT = new Set(["Armor","Health","Armor Regen","Armor on Kill","Health on Kill"]);
+const pct = (t,k)=> t[k]?t[k].pct:0;
+const state = {};
+let spec="None", useSHD=true;
+const shdPoints={};
+
+function el(t,p={},kids=[]){const e=document.createElement(t);Object.assign(e,p);
+  kids.forEach(k=>e.append(k));return e;}
+function sel(opts,val,on,ph){
+  const s=el("select");
+  if(ph!==undefined) s.append(el("option",{value:"",textContent:ph}));
+  opts.forEach(o=>{const[v,l]=Array.isArray(o)?o:[o,o];
+    const op=el("option",{value:v,textContent:l}); if(v===val)op.selected=true; s.append(op);});
+  s.onchange=()=>{on(s.value);render();};
+  return s;
+}
+
+function slotAttrCount(st){
+  if(st.kind==="Gear Set") return 1;
+  if(st.kind==="Brand Set") return 2;
+  if(st.kind==="Improvised") return 2;
+  return 0;
+}
+function hasModSlot(slotId,st,native){
+  if(st.kind==="Empty") return false;
+  if(st.kind==="Improvised") return true;   // mod slot on every slot
+  return native;                             // mask, chest, backpack only
+}
+
+function renderGear(){
+  const host=document.getElementById("gear"); host.innerHTML="";
+  DATA.slots.forEach(([id,label,native])=>{
+    const st=state[id];
+    const row=el("div",{className:"slot"}); row.dataset.kind=st.kind;
+    row.append(el("div",{className:"slotname",textContent:label}));
+    const body=el("div");
+
+    // line 1: kind + item
+    const l1=el("div",{className:"row"});
+    l1.append(sel(KIND,st.kind,v=>{st.kind=v;st.item="";st.core="";st.attrs=["",""];st.mod="";}));
+    if(st.kind==="Brand Set")
+      l1.append(sel(Object.keys(DATA.brands).sort(),st.item,v=>{st.item=v;st.core=DATA.brands[v].core||"";},"Pick a brand"));
+    if(st.kind==="Gear Set")
+      l1.append(sel(Object.keys(DATA.gearsets).sort(),st.item,v=>{st.item=v;st.core=DATA.gearsets[v].core||"";},"Pick a gear set"));
+    if(st.kind==="Improvised") l1.append(el("span",{className:"tag",textContent:"No brand bonus, mod slot on every piece"}));
+    body.append(l1);
+
+    if(st.kind!=="Empty"){
+      // line 2: core
+      const l2=el("div",{className:"row"});
+      const fixed = st.kind==="Gear Set" && DATA.gearsets[st.item] && DATA.gearsets[st.item].core;
+      if(fixed){
+        const[cn,cv,cc]=CORE_LABEL[fixed];
+        l2.append(el("span",{className:"tag "+cc,innerHTML:`<span class="pip" style="background:currentColor"></span>${cn} +${fmt(cv)} (set fixed)`}));
+        st.core=fixed;
+      } else {
+        l2.append(sel([["weapon","Weapon Damage +15%"],["armor","Armor +170,001"],["skill","Skill Tier +1"]],
+          st.core,v=>st.core=v,"Pick a core"));
+        if(st.kind==="Brand Set"&&st.item&&DATA.brands[st.item].core)
+          l2.append(el("span",{className:"tag",textContent:"drops as "+CORE_LABEL[DATA.brands[st.item].core][0]}));
+      }
+      body.append(l2);
+
+      // line 3: secondaries
+      const n=slotAttrCount(st);
+      if(n){
+        const l3=el("div",{className:"row"});
+        for(let i=0;i<n;i++){
+          const opts=DATA.attrPool.map(([a,v])=>{
+            const val=(st.kind==="Gear Set"&&GS_UPLIFT[a])?GS_UPLIFT[a]:v;
+            return [a,`${a} +${fmt(val)}`];
+          });
+          l3.append(sel(opts,st.attrs[i]||"",v=>st.attrs[i]=v,"Attribute "+(i+1)));
+        }
+        body.append(l3);
+      }
+
+      // line 4: gear mod
+      if(hasModSlot(id,st,native)){
+        const l4=el("div",{className:"row"});
+        const opts=[];
+        for(const fam in DATA.mods) DATA.mods[fam].forEach(([a,v])=>opts.push([fam+"|"+a,`${fam}: ${a} +${fmt(v)}`]));
+        l4.append(sel(opts,st.mod,v=>st.mod=v,"Empty gear mod slot"));
+        body.append(l4);
+      }
+    }
+    row.append(body); host.append(row);
+  });
+}
+
+function fmt(v){ return v>=1000 ? v.toLocaleString() : (Math.round(v*10)/10)+(v<=100?"%":""); }
+const CAT_NAME={core:"Core",attr:"Rolled attribute",mod:"Gear mod",brand:"Brand bonus",
+  set:"Gear set bonus",shd:"SHD Watch",spec:"Specialization",other:"Other"};
+
+function statRow(p,name,e){
+  const bits=[];
+  if(e.flat) bits.push("+"+Math.round(e.flat).toLocaleString());
+  if(e.pct) bits.push(name==="Skill Tier" ? e.pct.toFixed(1) : (Math.round(e.pct*10)/10)+"%");
+
+  const open=openStats.has(name);
+  const row=el("div",{className:"stat clickable"+(open?" open":"")});
+  row.tabIndex=0; row.setAttribute("role","button");
+  row.setAttribute("aria-expanded",open?"true":"false");
+  row.append(el("span",{},[el("i",{className:"caret",textContent:open?"\u25BE":"\u25B8"}),
+                           document.createTextNode(name)]));
+  row.append(el("b",{textContent:bits.join("  \u00B7  ")}));
+  const toggle=()=>{open?openStats.delete(name):openStats.add(name);renderOut();};
+  row.onclick=toggle;
+  row.onkeydown=ev=>{if(ev.key==="Enter"||ev.key===" "){ev.preventDefault();toggle();}};
+  p.append(row);
+
+  // proportion bar, always visible, colour coded by source category
+  const tot=e.src.reduce((a,s)=>a+Math.abs(s.v),0);
+  if(tot>0 && e.src.length>1){
+    const seg=el("div",{className:"seg"});
+    e.src.forEach(s=>seg.append(el("i",{className:"c-"+s.cat,
+      style:"width:"+(Math.abs(s.v)/tot*100)+"%",title:s.label})));
+    p.append(seg);
+  }
+
+  if(open){
+    const box=el("div",{className:"srcbox"});
+    e.src.slice().sort((a,b)=>Math.abs(b.v)-Math.abs(a.v)).forEach(s=>{
+      const val = s.u==="n" ? "+"+Math.round(s.v).toLocaleString()
+        : (name==="Skill Tier" ? "+"+s.v.toFixed(1) : "+"+(Math.round(s.v*10)/10)+"%");
+      box.append(el("div",{className:"srcline"},[
+        el("i",{className:"dot c-"+s.cat}),
+        el("span",{textContent:s.label}),
+        el("b",{textContent:val})]));
+    });
+    box.append(el("div",{className:"srcfoot",textContent:
+      e.src.length+" source"+(e.src.length===1?"":"s")+" contributing"}));
+    p.append(box);
+  }
+}
+
+function parseBonus(str){
+  // "+18% Repair Skills", "+1.0 Skill Tier", "20% Increased Burn Duration"
+  const out=[];
+  if(!str||str==="—") return out;
+  str.split(" · ").forEach(p=>{
+    const m=p.trim().match(/^\+?(-?[\d.]+)\s*(%?)\s+(.+)$/);
+    if(m) out.push([normalize(m[3].trim()), parseFloat(m[1]), m[2]?"%":"%"]);
+  });
+  return out;
+}
+function normalize(n){
+  const map={"Status Effect":"Status Effects","Skill Repair":"Repair Skills","Crit Hit Chance":"Critical Hit Chance",
+    "Crit Hit Damage":"Critical Hit Damage","Armor On Kill":"Armor on Kill"};
+  return map[n]||n;
+}
+
+function compute(){
+  const t={};
+  const add=(n,v,u,label,cat)=>{n=normalize(n);
+    if(u===undefined) u="%";
+    const e=t[n]||(t[n]={pct:0,flat:0,src:[]});
+    if(u==="n") e.flat+=v; else e.pct+=v;
+    if(v) e.src.push({label:label||"Unknown",cat:cat||"other",v:v,u:u});};
+  const brandCount={}, setCount={};
+  const effects=[];
+
+  DATA.slots.forEach(([id,label,native])=>{
+    const st=state[id]; if(st.kind==="Empty") return;
+    if(st.core){const[cn,cv]=CORE_LABEL[st.core];
+      add(cn,cv,st.core==="armor"?"n":"%",label+" core","core");}
+    const n=slotAttrCount(st);
+    for(let i=0;i<n;i++){
+      const a=st.attrs[i]; if(!a) continue;
+      const base=DATA.attrPool.find(x=>x[0]===a)[1];
+      add(a,(st.kind==="Gear Set"&&GS_UPLIFT[a])?GS_UPLIFT[a]:base,FLAT.has(a)?"n":"%",
+        label+" attribute","attr");
+    }
+    if(st.mod && hasModSlot(id,st,native)){
+      const[fam,attr]=st.mod.split("|");
+      const v=DATA.mods[fam].find(x=>x[0]===attr)[1];
+      add(attr,v,FLAT.has(attr)?"n":"%",label+" gear mod","mod");
+    }
+    if(st.kind==="Brand Set"&&st.item) brandCount[st.item]=(brandCount[st.item]||0)+1;
+    if(st.kind==="Gear Set"&&st.item) setCount[st.item]=(setCount[st.item]||0)+1;
+  });
+
+  for(const b in brandCount){
+    const n=Math.min(brandCount[b],3);
+    for(let i=0;i<n;i++)
+      parseBonus(DATA.brands[b].bonuses[i]).forEach(([a,v,u])=>add(a,v,u,b+" "+(i+1)+"pc","brand"));
+  }
+  for(const g in setCount){
+    const n=setCount[g], gs=DATA.gearsets[g];
+    if(n>=2) parseBonus(gs["2pc"]).forEach(([a,v,u])=>add(a,v,u,g+" 2pc","set"));
+    if(n>=3) parseBonus(gs["3pc"]).forEach(([a,v,u])=>add(a,v,u,g+" 3pc","set"));
+    if(n>=4) effects.push([g+" 4pc", gs["4pc"]]);
+    if(n>=4){
+      if(state.chest.item===g) effects.push([g+" chest talent", gs["Chest"]]);
+      if(state.backpack.item===g) effects.push([g+" backpack talent", gs["Backpack"]]);
+    }
+  }
+  if(useSHD) DATA.shd.forEach(([quad,nodes])=>nodes.forEach(([a,rate])=>{
+    const pts=shdPoints[a]; if(pts) add(a,pts*rate,"%","SHD Watch "+quad+" ("+pts+"/50)","shd");
+  }));
+  (DATA.specs[spec]||[]).forEach(([a,v])=>add(a,v,"%",spec+" specialization","spec"));
+
+  return {t,brandCount,setCount,effects};
+}
+
+const ORDER=[
+ ["Offense",["Weapon Damage","Critical Hit Chance","Critical Hit Damage","Headshot Damage","Weapon Handling",
+   "Rate of Fire","Reload Speed","Magazine Size","Ammo Capacity","Accuracy","Stability","Damage to Armor",
+   "Explosives Damage","Signature Weapon Damage","Optimal Range"]],
+ ["Weapon type",["Assault Rifle Damage","Rifle Damage","Marksman Rifle Damage","SMG Damage","LMG Damage",
+   "Shotgun Damage","Pistol Damage"]],
+ ["Skills",["Skill Tier","Skill Damage","Skill Haste","Skill Duration","Skill Health","Skill Efficiency",
+   "Repair Skills","Status Effects","Increased Burn Duration","Burn Damage"]],
+ ["Survivability",["Armor","Total Armor","Health","Total Health","Armor Regen","Armor on Kill","Health on Kill","Shield Health",
+   "Incoming Repairs","Hazard Protection","Explosive Resistance","Protection from Elites","Increased Threat",
+   "Reduced Threat"]],
+ ["Resistances",["Bleed Resistance","Blind/Deaf Resistance","Burn Resistance","Disorient Resistance",
+   "Disrupt Resistance","Ensnare Resistance","Pulse Resistance","Shock Resistance"]],
+];
+
+function renderOut(){
+  const {t,brandCount,setCount,effects}=compute();
+  const out=document.getElementById("out"); out.innerHTML="";
+  const lg=el("div",{className:"legend"});
+  Object.keys(CAT_NAME).filter(k=>k!=="other").forEach(k=>
+    lg.append(el("span",{className:"lg"},[el("i",{className:"dot c-"+k}),
+      document.createTextNode(CAT_NAME[k])])));
+  out.append(lg);
+
+  // crit cap and skill tier cap get a bar each
+  const chc=pct(t,"Critical Hit Chance"), stier=pct(t,"Skill Tier");
+  capBlock(out,"Critical Hit Chance",chc,60,"%",t["Critical Hit Chance"]);
+  capBlock(out,"Skill Tier",stier,6,"",t["Skill Tier"]);
+
+  const shown=new Set(["Critical Hit Chance","Skill Tier"]);
+  ORDER.forEach(([grp,keys])=>{
+    const rows=keys.filter(k=>t[k]!==undefined&&!shown.has(k));
+    if(!rows.length) return;
+    out.append(el("div",{className:"grp",textContent:grp}));
+    rows.forEach(k=>{shown.add(k);statRow(out,k,t[k]);});
+  });
+  const rest=Object.keys(t).filter(k=>!shown.has(k));
+  if(rest.length){
+    out.append(el("div",{className:"grp",textContent:"Other"}));
+    rest.forEach(k=>statRow(out,k,t[k]));
+  }
+
+  // divisor maths
+  const haste=pct(t,"Skill Haste")/100, rl=pct(t,"Reload Speed")/100, dur=pct(t,"Skill Duration")/100;
+  const cd=+document.getElementById("cd").value||0,
+        base=+document.getElementById("dur").value||0,
+        rbase=+document.getElementById("rl").value||0;
+  const ecd=cd/(1+haste), edur=base*(1+dur), erl=rbase/(1+rl);
+  out.append(el("div",{className:"grp",textContent:"Derived"}));
+  line(out,"Effective cooldown",ecd.toFixed(2)+"s");
+  line(out,"Effective duration",edur.toFixed(2)+"s");
+  line(out,"Effective reload",erl.toFixed(2)+"s");
+  line(out,"Skill uptime",(edur/(edur+ecd)*100).toFixed(1)+"%");
+
+  if(chc>60) note(out,"warn","Crit chance is "+(chc-60).toFixed(1)+" points over the 60% cap. That overflow is wasted, move it into Crit Hit Damage.");
+  if(chc>=25&&chc<60) note(out,"warn","Below the 60% crit cap at "+chc.toFixed(1)+"%. Crit Hit Damage only pays out on the crits you actually land.");
+  if(stier>6) note(out,"warn","Skill Tier is over the cap of 6. "+(stier-6).toFixed(1)+" tiers are doing nothing.");
+  if(stier>=6&&spec==="Technician") note(out,"warn","Technician's +1 Skill Tier is wasted at ST6. Survivalist is the usual swap.");
+  if(haste>1.5) note(out,"","Skill Haste is a divisor. Past roughly 150% the next chunk buys very little, so consider redirecting that budget.");
+
+  const mods=DATA.slots.filter(([id,l,nat])=>hasModSlot(id,state[id],nat)).length;
+  note(out,"","Gear mod slots in this loadout: "+mods+" of a possible 6.");
+
+  renderHazard(t);
+
+  // equipped sets panel
+  const cp=document.getElementById("counts"); cp.innerHTML="";
+  let any=false;
+
+  for(const g in setCount){any=true;
+    const n=setCount[g], gs=DATA.gearsets[g];
+    cp.append(setBlock(g,n,4,"set",[
+      [2,"2pc",gs["2pc"]],[3,"3pc",gs["3pc"]],[4,"4pc",gs["4pc"]],
+    ],[
+      [4,"Chest talent",gs["Chest"],state.chest.item===g],
+      [4,"Backpack talent",gs["Backpack"],state.backpack.item===g],
+    ]));
+  }
+  for(const b in brandCount){any=true;
+    const n=brandCount[b], bo=DATA.brands[b].bonuses;
+    cp.append(setBlock(b,n,3,"brand",[
+      [1,"1pc",bo[0]],[2,"2pc",bo[1]],[3,"3pc",bo[2]],
+    ],[]));
+  }
+  if(!any) cp.append(el("div",{className:"empty",textContent:
+    "No sets assigned yet. Pick brands or gear sets above and their bonuses are listed here, with the tiers you have reached highlighted."}));
+
+}
+function setBlock(name,have,max,cat,tiers,talents){
+  const box=el("div",{className:"setblock "+cat});
+  const head=el("div",{className:"sethead"});
+  head.append(el("span",{className:"setname",textContent:name}));
+  head.append(el("span",{className:"setcount",textContent:have+" of "+max+" pieces"}));
+  box.append(head);
+
+  if(have>max) box.append(el("div",{className:"setover",
+    textContent:"Nothing gained past "+max+" pieces. "+(have-max)+" piece"+(have-max>1?"s are":" is")+" contributing stats only."}));
+
+  tiers.forEach(([need,label,text])=>{
+    const on=have>=need;
+    const r=el("div",{className:"tier"+(on?" on":"")});
+    r.append(el("span",{className:"tiertag",textContent:label}));
+    r.append(el("span",{className:"tiertext",textContent:text&&text!=="\u2014"?text:"not recorded"}));
+    box.append(r);
+  });
+
+  talents.forEach(([need,label,text,equipped])=>{
+    if(!text) return;
+    const on=have>=need&&equipped;
+    const r=el("div",{className:"tier talent"+(on?" on":"")});
+    r.append(el("span",{className:"tiertag",textContent:label}));
+    r.append(el("span",{className:"tiertext",textContent:
+      text+(have>=need&&!equipped?"  (needs that piece equipped)":"")}));
+    box.append(r);
+  });
+  return box;
+}
+
+function renderHazard(t){
+  const hp=document.getElementById("hazard"); hp.innerHTML="";
+  const universal=pct(t,"Hazard Protection");
+  const head=el("div",{className:"haz head"});
+  ["Status effect","Hazard","Specific","Total"].forEach(x=>head.append(el("span",{textContent:x})));
+  hp.append(head);
+
+  HAZARDS.forEach(([label,key,sourced])=>{
+    const spec=pct(t,key);
+    const total = hazModel==="mult"
+      ? (1-(1-Math.min(1,universal/100))*(1-Math.min(1,spec/100)))*100
+      : universal+spec;
+    const row=el("div",{className:"haz"+((universal||spec)?"":" none")});
+    row.append(el("span",{textContent:label}));
+    row.append(el("span",{textContent:universal?universal.toFixed(1)+"%":"—"}));
+    row.append(el("span",{className:spec?"":"gap",textContent:spec?spec.toFixed(1)+"%":(sourced?"—":"n/a")}));
+    row.append(el("b",{textContent:total.toFixed(1)+"%"}));
+    hp.append(row);
+  });
+
+  const missing=HAZARDS.filter(h=>!h[2]).map(h=>h[0]).join(" and ");
+  hp.append(el("div",{className:"note",textContent:
+    "Hazard Protection applies to every status effect. The specific column is that type's own resistance, which comes from gear mods and a few brand bonuses."}));
+  hp.append(el("div",{className:"note",textContent:
+    "How the two stack is not confirmed in the project sources, so the total column follows whichever model you pick above. Treat it as a comparison aid, not a verified number."}));
+  if(missing) hp.append(el("div",{className:"note",textContent:
+    missing+" resistance appear on the wiki mod list but have no captured mod values yet, so they cannot be assigned in this build."}));
+}
+function line(p,l,v){p.append(el("div",{className:"stat"},[el("span",{textContent:l}),el("b",{textContent:v})]));}
+function note(p,cls,txt){p.append(el("div",{className:"note "+cls,textContent:txt}));}
+function capBlock(p,name,v,cap,unit,e){
+  p.append(el("div",{className:"grp",textContent:name+" (cap "+cap+unit+")"}));
+  const bar=el("div",{className:"bar"+(v>cap?" over":"")});
+  bar.append(el("i",{style:"width:"+Math.min(100,v/cap*100)+"%"}));
+  if(e && e.src.length){ statRow(p,name,e); p.append(bar); }
+  else{
+    p.append(el("div",{className:"stat"},[el("span",{textContent:"Total"}),
+      el("b",{textContent:(name==="Skill Tier"?v.toFixed(1):v.toFixed(1)+"%")})]));
+    p.append(bar);
+  }
+}
+
+function renderSHD(){
+  const host=document.getElementById("shdpanel"); host.innerHTML="";
+  let used=0, cap=0;
+  DATA.shd.forEach(([quad,nodes])=>{
+    const g=el("div",{className:"quad"});
+    g.append(el("div",{className:"quadname",textContent:quad}));
+    nodes.forEach(([name,rate])=>{
+      const pts=shdPoints[name]; used+=pts; cap+=50;
+      const r=el("div",{className:"node"+(pts?"":" zero")});
+      r.append(el("span",{className:"nodename",textContent:name}));
+      const inp=el("input",{type:"range",min:0,max:50,step:1,value:pts,className:"slider"});
+      const num=el("input",{type:"number",min:0,max:50,step:1,value:pts,className:"num"});
+      const val=el("b",{className:"nodeval",textContent:"+"+(pts*rate).toFixed(1)+"%"});
+      const set=v=>{v=Math.max(0,Math.min(50,Math.round(+v||0)));
+        shdPoints[name]=v; inp.value=v; num.value=v;
+        val.textContent="+"+(v*rate).toFixed(1)+"%";
+        r.classList.toggle("zero",!v);
+        shdTotal(); renderOut();};
+      inp.oninput=()=>set(inp.value);
+      num.oninput=()=>set(num.value);
+      r.append(inp,num,val);
+      r.title=name+" gives "+rate+"% per point, "+(50*rate).toFixed(0)+"% at 50 of 50";
+      g.append(r);
+    });
+    host.append(g);
+  });
+  shdTotal();
+}
+function shdTotal(){
+  let used=0;
+  DATA.shd.forEach(([q,nodes])=>nodes.forEach(([n])=>used+=shdPoints[n]));
+  document.getElementById("shdtotal").textContent=used+" of 800 points assigned";
+}
+
+function render(){renderGear();renderSHD();renderOut();}
+
+// controls
+const sp=document.getElementById("spec");
+sp.onchange=()=>{spec=sp.value;render();};
+document.getElementById("shdmax").onclick=()=>{for(const k in shdPoints)shdPoints[k]=50;render();};
+document.getElementById("shdclear").onclick=()=>{for(const k in shdPoints)shdPoints[k]=0;render();};
+document.getElementById("hazmodel").onchange=e=>{hazModel=e.target.value;renderOut();};
+document.getElementById("shd").onchange=e=>{useSHD=e.target.checked;render();};
+["cd","dur","rl"].forEach(id=>document.getElementById(id).oninput=renderOut);
+document.getElementById("reset").onclick=()=>{DATA.slots.forEach(([id])=>state[id]={kind:"Empty",item:"",core:"",attrs:["",""],mod:""});render();};
+document.getElementById("copy").onclick=()=>{
+  const code=btoa(JSON.stringify({f:BUILD_CODE_FORMAT,v:VERSION,state,spec,useSHD,shdPoints}));
+  navigator.clipboard?.writeText(code);
+  document.getElementById("copy").textContent="Copied";
+  setTimeout(()=>document.getElementById("copy").textContent="Copy build code",1400);
+};
+document.getElementById("load").onclick=()=>{
+  const c=prompt("Paste a build code"); if(!c) return;
+  try{
+    const o=JSON.parse(atob(c.trim()));
+    const f=o.f||0;
+    if(f>BUILD_CODE_FORMAT){
+      alert("This code was made in a newer version of the planner (format "+f+
+        ", this build reads "+BUILD_CODE_FORMAT+"). Update to the latest version and try again.");
+      return;
+    }
+    Object.assign(state,o.state); spec=o.spec; useSHD=o.useSHD;
+    if(o.shdPoints) Object.assign(shdPoints,o.shdPoints);
+    sp.value=spec; document.getElementById("shd").checked=useSHD; render();
+    if(f<BUILD_CODE_FORMAT) setTimeout(()=>alert(
+      "Loaded a code from an older format (made in v"+(o.v||"unknown")+
+      "). Anything added since then is at its default, so check the build over before trusting the numbers."),60);
+  }
+  catch(e){alert("That build code could not be read. Check it was copied whole.");}
+};
+document.getElementById("ver").textContent="v"+VERSION+" beta";
+document.title="SHD Loadout Bench v"+VERSION;
+window.SHDBench={compute,VERSION,BUILD_CODE_FORMAT,get state(){return state;},get render(){return render;}};
+
+// ---- data load ----
+function fatal(msg,detail){
+  document.getElementById("boot").innerHTML="";
+  const box=el("div",{className:"fatal"});
+  box.append(el("h3",{textContent:"Could not load the weapon and gear data"}));
+  box.append(el("p",{textContent:msg}));
+  if(detail) box.append(el("code",{textContent:detail}));
+  document.getElementById("boot").append(box);
+}
+
+async function boot(){
+  let raw;
+  try{
+    const r=await fetch("data.json",{cache:"no-cache"});
+    if(!r.ok) throw new Error("HTTP "+r.status);
+    raw=await r.json();
+  }catch(e){
+    if(location.protocol==="file:")
+      fatal("This version loads its data from a separate file, which browsers block when a page is opened directly from disk. Open it from the hosted link instead, or run a local web server in this folder.",String(e));
+    else
+      fatal("data.json could not be fetched. Check that it sits in the same folder as this page.",String(e));
+    return;
+  }
+  if(!raw || typeof raw!=="object" || !raw.data){ fatal("data.json loaded but does not look like a data file."); return; }
+  if(raw.schema!==DATA_SCHEMA){
+    fatal("data.json is schema "+raw.schema+" but this build reads schema "+DATA_SCHEMA+
+          ". The app and its data file are out of step — update whichever is older."); return;
+  }
+  DATA=raw.data;
+
+  // things that depend on DATA
+  DATA.slots.forEach(([id])=>state[id]={kind:"Empty",item:"",core:"",attrs:["",""],mod:""});
+  DATA.shd.forEach(([q,nodes])=>nodes.forEach(([n])=>shdPoints[n]=50));
+  Object.keys(DATA.specs).forEach(x=>sp.append(el("option",{value:x,textContent:x})));
+
+  document.getElementById("boot").remove();
+  document.getElementById("app").hidden=false;
+  const meta=document.getElementById("datameta");
+  if(meta) meta.textContent="Data generated "+(raw.generated||"unknown")+" · schema "+raw.schema;
+  render();
+}
+boot();
+</script>
+</body>
+</html>

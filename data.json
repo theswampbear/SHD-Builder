@@ -1,0 +1,724 @@
+{
+ "schema": 1,
+ "generated": "2026-09-13",
+ "source": "Division2_Screenshot_Catalogue.md + Division2_VERIFIED_MECHANICS.md (Y8S3 live)",
+ "data": {
+  "brands": {
+   "Alps Summit Armament": {
+    "bonuses": [
+     "+18% Repair Skills",
+     "+18% Skill Duration",
+     "+30% Skill Haste"
+    ],
+    "core": "skill"
+   },
+   "Murakami Industries": {
+    "bonuses": [
+     "+15% Skill Duration",
+     "+35% Repair Skills",
+     "+18% Skill Damage"
+    ],
+    "core": "skill"
+   },
+   "Edelweiss GPz": {
+    "bonuses": [
+     "+18% Repair Skills",
+     "+20% Skill Haste",
+     "+8% Skill Efficiency"
+    ],
+    "core": "skill"
+   },
+   "Shiny Monkey Gear": {
+    "bonuses": [
+     "+15% Skill Duration",
+     "+5% Skill Efficiency",
+     "+52% Repair Skills"
+    ],
+    "core": "skill"
+   },
+   "Electrique": {
+    "bonuses": [
+     "+10% Status Effects",
+     "+20% Hazard Protection",
+     "+8% Skill Efficiency"
+    ],
+    "core": "skill"
+   },
+   "Wyvern Wear": {
+    "bonuses": [
+     "+8% Skill Damage",
+     "+20% Status Effects",
+     "+45% Skill Duration"
+    ],
+    "core": "skill"
+   },
+   "Unit Alloys": {
+    "bonuses": [
+     "+5% Rate of Fire",
+     "+24% Assault Rifle Damage",
+     "+50% Magazine Size"
+    ],
+    "core": "weapon"
+   },
+   "Sokolov Concern": {
+    "bonuses": [
+     "+12% SMG Damage",
+     "+13% Crit Hit Damage",
+     "+8% Crit Hit Chance"
+    ],
+    "core": "weapon"
+   },
+   "Habsburg Guard": {
+    "bonuses": [
+     "+13% Headshot Damage",
+     "+24% Marksman Rifle Damage",
+     "+25% Status Effects"
+    ],
+    "core": "armor"
+   },
+   "Imminence Armaments": {
+    "bonuses": [
+     "+6% Weapon Damage",
+     "+48% Pistol Damage",
+     "+30% Skill Health"
+    ],
+    "core": "weapon"
+   },
+   "Overlord Armaments": {
+    "bonuses": [
+     "+12% Rifle Damage",
+     "+30% Accuracy",
+     "+30% Weapon Handling"
+    ],
+    "core": "weapon"
+   },
+   "Petrov Defense Group": {
+    "bonuses": [
+     "+12% LMG Damage",
+     "+15% Weapon Handling",
+     "+50% Ammo Capacity"
+    ],
+    "core": "weapon"
+   },
+   "Česká Výroba": {
+    "bonuses": [
+     "+8% Crit Hit Chance",
+     "+24% Shotgun Damage",
+     "+30% Hazard Protection"
+    ],
+    "core": "weapon"
+   },
+   "Royal Works": {
+    "bonuses": [
+     "+5% Weapon Handling",
+     "+24% LMG Damage",
+     "+50% Accuracy"
+    ],
+    "core": "weapon"
+   },
+   "Empress International": {
+    "bonuses": [
+     "+10% Skill Health",
+     "+13% Skill Damage",
+     "+8% Skill Efficiency"
+    ],
+    "core": "skill"
+   },
+   "Hana-U Corporation": {
+    "bonuses": [
+     "+10% Skill Haste",
+     "+13% Skill Damage",
+     "+18% Weapon Damage"
+    ],
+    "core": "skill"
+   },
+   "Legatus S.p.A.": {
+    "bonuses": [
+     "+15% Magazine Size",
+     "+24% SMG Damage",
+     "+105% Optimal Range"
+    ],
+    "core": "weapon"
+   },
+   "Fenris Group AB": {
+    "bonuses": [
+     "+12% Assault Rifle Damage",
+     "+32% Magazine Size",
+     "+50% Stability"
+    ],
+    "core": "weapon"
+   },
+   "Yaahl Gear": {
+    "bonuses": [
+     "+10% Hazard Protection",
+     "+12% Weapon Damage",
+     "+40% Pulse Resistance"
+    ],
+    "core": "armor"
+   },
+   "Grupo Sombra S.A.": {
+    "bonuses": [
+     "+13% Crit Hit Damage",
+     "+20% Explosives Damage",
+     "+39% Headshot Damage"
+    ],
+    "core": "skill"
+   },
+   "Uzina Getica": {
+    "bonuses": [
+     "+5% Total Armor",
+     "+10% Armor on Kill",
+     "+30% Hazard Protection"
+    ],
+    "core": "armor"
+   },
+   "Douglas & Harding": {
+    "bonuses": [
+     "+24% Pistol Damage",
+     "+20% Skill Health",
+     "+50% Accuracy"
+    ],
+    "core": "weapon"
+   },
+   "Providence Defense": {
+    "bonuses": [
+     "+13% Headshot Damage",
+     "+8% Crit Hit Chance",
+     "+13% Crit Hit Damage"
+    ],
+    "core": "weapon"
+   },
+   "Airaldi Holdings": {
+    "bonuses": [
+     "+12% Marksman Rifle Damage",
+     "+26% Headshot Damage",
+     "+5% Damage to Armor"
+    ],
+    "core": "weapon"
+   },
+   "Lengmo": {
+    "bonuses": [
+     "+15% Reload Speed",
+     "+24% LMG Damage",
+     "+30% Weapon Handling"
+    ],
+    "core": "armor"
+   },
+   "Palisade Steelworks": {
+    "bonuses": [
+     "+10% Armor on Kill",
+     "+24% Protection from Elites",
+     "+1.0 Skill Tier"
+    ],
+    "core": "armor"
+   },
+   "Urban Lookout": {
+    "bonuses": [
+     "+5% Weapon Handling",
+     "+24% Marksman Rifle Damage",
+     "+45% Skill Duration"
+    ],
+    "core": "weapon"
+   },
+   "Golan Gear Ltd": {
+    "bonuses": [
+     "+20% Explosive Resistance",
+     "+1.5% Armor Regen",
+     "+150% Increased Threat"
+    ],
+    "core": "armor"
+   },
+   "China Light Industries": {
+    "bonuses": [
+     "—",
+     "—",
+     "—"
+    ],
+    "core": ""
+   }
+  },
+  "gearsets": {
+   "Ortiz: Exuro": {
+    "2pc": "20% Increased Burn Duration · 15% Skill Health",
+    "3pc": "40% Burn Damage",
+    "4pc": "Ortiz Incinerator Turret Prototype: The Incinerator Turret spins 360 degrees. You are immune to your own Incinerator Turret's fire. The Incinerator Turret explodes when disabled.",
+    "Chest": "Chain Combustion: Enemies set on fire by the Ortiz Incinerator Turret Prototype ignite other enemies within 10m.",
+    "Backpack": "Heatstroke: Amplifies Weapon Damage by 40% to enemies set on fire by the Ortiz Incinerator Turret Prototype. Adds 25% Ortiz Incinerator Turret Prototype Range.",
+    "core": ""
+   },
+   "Measured Assembly": {
+    "2pc": "15% Skill Haste",
+    "3pc": "60% Repair Skills · 40% Explosive Resistance",
+    "4pc": "Huddle: Receive 1 Skill Tier for each ally Agent that is within range of your Hive or Smart Cover. While at Skill Tier 6, having at least one ally Agent in the range of your Hive or Smart Cover for 4 seconds will grant Overcharge for 15 seconds. Cooldown is 40 seconds. Mortars and enemy Skills that enter the range of your Hive or Smart Cover will be destroyed. Cooldown is 10 seconds. The cooldown for this is 20% faster for each ally Agent within the range of your Hive or Smart Cover.",
+    "Chest": "Hivemind: Decrease the Overcharge cooldown from 40 seconds to 25 seconds.",
+    "Backpack": "Smart Cooperation: Decrease the cooldown for destroying Mortars and enemy Skills from 10 seconds to 1 second.",
+    "core": "skill"
+   },
+   "Ongoing Directive": {
+    "2pc": "15% Status Effect",
+    "3pc": "30% Reload Speed",
+    "4pc": "Rules of Engagement: Shooting a status affected enemy will apply a mark. Killing a marked enemy grants a full clip of Hollow-Point Ammo for your active weapon, and half a clip of the agent's active weapon to the rest of the party. The Mark applied lasts for 10 seconds. Hollow-Point Ammo amplifies weapon damage by 40% and applies bleed on hit.",
+    "Chest": "Parabellum Rounds: Increases Hollow-Point Ammo weapon damage amplification to 60%. This bonus does not apply to party members.",
+    "Backpack": "Trauma Specialist: Increases the duration of your bleed Status Effect by 50% and increases all bleed damage done by 100%.",
+    "core": ""
+   },
+   "Hunter's Fury": {
+    "2pc": "15% Shotgun Damage · 15% SMG Damage",
+    "3pc": "20% Armor on Kill · 50% Health on Kill",
+    "4pc": "Apex Predator: Enemies within 15 meters receive a debuff, amplifying your weapon damage against them by 20%. Killing a debuffed enemy with your weapon disorients other enemies within 5 meters, and amplifies weapon damage by 5% for 10 seconds, stacking up to 5 times.",
+    "Chest": "Endless Hunger: It increases the duration of your Apex Predator weapon damage stacks from 10 seconds to 30 seconds.",
+    "Backpack": "Overwhelming Force: Increases the radius of disorient on Apex Predator kills from 5 meters to 10 meters.",
+    "core": ""
+   },
+   "Refactor": {
+    "2pc": "15% Status Effect",
+    "3pc": "25% Skill Damage",
+    "4pc": "Return to Sender: Receive repairs of 10% of the damage dealt by your Skills. Your allies receive repairs of 20% of the damage dealt by your Skills.",
+    "Chest": "Increases Interest: Increase repairs received from Return to Sender from 10% to 25% to self, and from 20% to 35% for other Agents in your party.",
+    "Backpack": "Over-engineered: While at full Armor, repairs received from Return to Sender will provide Bonus Armor, up to 80% of your Total Armor. Does not apply to allies.",
+    "core": ""
+   },
+   "Striker's Battlegear": {
+    "2pc": "15% Weapon Handling",
+    "3pc": "15% Rate of Fire",
+    "4pc": "Striker's Gamble: Weapon hits increase total weapon damage by .65% stacking up to 100 times. 1 stack lost per second when between 0 and 50 stacks. 2 stacks lost per second when between 50 and 100 stacks.",
+    "Chest": "Press the Advantage: Inscreases max stacks for Striker's Gamble from 100 to 200. 3 stacks lost per second when between 100 and 200 stacks.",
+    "Backpack": "Risk Management: Increases total weapon damage gained per stack of Striker's Gamble from .65% to .90%.",
+    "core": "weapon"
+   },
+   "Tipping Scales": {
+    "2pc": "30% Magazine Size",
+    "3pc": "30% LMG Damage",
+    "4pc": "Throttle Control: Shooting builds stacks to a max of 50. Each stack provides .5% Weapon Handling and 5% Critical Hit Damage. Lose 6 stacks per second while not shooting. No stacks are lost if an enemy is Suppressed.",
+    "Chest": "Sustainability: Increase the maximum stacks gained from Throttle Control from 50 to 75.",
+    "Backpack": "Snowball: Increase the Critical Hit Damage received per stack from 5 to 8.",
+    "core": ""
+   },
+   "Rigger": {
+    "2pc": "15% Skill Haste",
+    "3pc": "15% Skill Duration",
+    "4pc": "Tend and Befriend: Interacting with your deployed skills grants the skill 25% skill damage for 10 seconds. This buff cannot be refreshed. Interactions include: using and/or deploying the Skill, changing the skills target, healing the skill.",
+    "Chest": "Best Buds: Increase the skill damage buff gained from 25% to 50%.",
+    "Backpack": "Complete Uptime: Canceling your currently deployed skills will completely resets their cooldown.",
+    "core": ""
+   },
+   "Umbra Initiative": {
+    "2pc": "15% Critical Hit Chance",
+    "3pc": "30% Reload Speed",
+    "4pc": "From the Shadows Into the Light: While in cover, gain 10 stacks per second, up to 50 stacks. Each stack will give 1.2% Critical Hit Damage increase and .4% RPM. Buff does not apply while shooting from cover. While out of cover, Agents lose 2 stacks per second at normal speed and 1 stack per second if sprinting. While out of cover and in combat, gain 10 Stacks per second, up to 50. Each stack will give .8% Armor Regen when it is consumed. Stacks consume at 10 stack per second, only in cover.",
+    "Chest": "From the Shadows: Increases max stacks for From the Shadows from 50 to 100, and stack gain from 10 to 20 stacks.",
+    "Backpack": "Into the Light: Increases the Into the Light maximum stacks from 50 to 100, increases the stack gain from 10 to 20, and increases stack consumption when returning to cover from 10 to 20 stacks per second.",
+    "core": ""
+   },
+   "Eclipse Protocol": {
+    "2pc": "15% Status Effect",
+    "3pc": "15% Skill Haste · 30% Hazard Protection",
+    "4pc": "Indirect Transmission: Your status effects now spread on kill to all enemies within 10 meters and refreshes 50% of the duration.",
+    "Chest": "Proliferation: Increases Indirect Transmission range from 10 meters to 15 meters, and refresh percentage from 50% to 75%.",
+    "Backpack": "Symptom Aggravator: Amplifies all damage you deal to status affected targets by 30%.",
+    "core": "skill"
+   },
+   "Hotshot": {
+    "2pc": "30% Marksman Rifle Damage",
+    "3pc": "30% Headshot Damage · 30% Weapon Handling",
+    "4pc": "Headache: First Headshot with a Marksman Rifle will increase next headshot by 80%. Second consecutive headshot with a Marksman Rifle will give 10% armor (if at full armor, it will give bonus armor max 50% of current armor value). Third consecutive headshot will refill magazine.",
+    "Chest": "Daring: Doubles max bonus armor max from 50% to 100%.",
+    "Backpack": "Blessed: Allows you to miss one headshot before your Headache talent cycle resets.",
+    "core": ""
+   },
+   "Heartbreaker": {
+    "2pc": "15% Assault Rifle Damage · 15% LMG Damage",
+    "3pc": "15% Weapon Handling",
+    "4pc": "Heartstopper: Headshots apply pulse for 5 seconds. Weapon hits on pulsed enemies add a stack of 1% bonus armor, and 1.1% weapon damage to pulsed enemies, up to a max of 50 stacks. 2 stacks are lost per second.",
+    "Chest": "Max BPM: Increases max stacks for Heartstopper from 50 to 100.",
+    "Backpack": "Cold: Increases total bonus armor gained per stack of Heartstopper from 1% to 2%.",
+    "core": ""
+   },
+   "Aegis": {
+    "2pc": "70% Health",
+    "3pc": "15% Total Armor",
+    "4pc": "Stoic: Get 4% Damage Resistance for every enemy that is targeting you. Max stack is 8. The bonus is multiplied by 1.X, where X is the number of agents in your group.",
+    "Chest": "Deceit: Enemies targeting your Decoy also count towards the Stoic Damage Resistance bonus.",
+    "Backpack": "Polyethylene Plating: Increase base Stoic Damage Resistance bonus from 4% to 5% per enemy targeting you.",
+    "core": ""
+   },
+   "Future Initiative": {
+    "2pc": "30% Repair Skills",
+    "3pc": "15% Skill Haste · 30% Skill Duration",
+    "4pc": "Ground Control: Increases you and your allies' total weapon and skill damage by 15% when at full armor. When you repair an ally, you and all allies within 5 meters of you are also repaired for 60% of that amount.",
+    "Chest": "Tactical Superiority: Increases Ground Control damage bonus from 15% to 25%.",
+    "Backpack": "Strategic Combat Support: Increases Ground Control proximity repair from 60% to 120%.",
+    "core": ""
+   },
+   "Foundry Bulwark": {
+    "2pc": "10% Total Armor",
+    "3pc": "1% Armor Regen · 50% Shield Health",
+    "4pc": "Makeshift Repairs: Whenever you or your shield take damage, 25% of that amount is repaired to both over 10 seconds.",
+    "Chest": "Improved Materials: Increases Makeshift Repairs from 25% to 35%.",
+    "Backpack": "Process Refinery: Increases amount of damage repair gained to you and your shielf from Makeshit Repairs, from 25% to 35%.",
+    "core": ""
+   },
+   "Core Strength": {
+    "2pc": "10% Weapon Handling",
+    "3pc": "5% Weapon Damage · 5% Total Armor · 5% Skill Efficiency",
+    "4pc": "Core Exercise: For each Core on your Gear Pieces, receive 40% of the other two Cores' bonuses. Skill Tiers count as 15% Skill Efficiency when these bonuses are applied. All pieces from this Gear Set, apart from the Backpack, will feature random Cores.",
+    "Chest": "Inner Core: Increase the percentage of the bonuses you receive from the other Cores from 40% to 75%.",
+    "Backpack": "Outer Core: This Talent does not provide a direct change to the Core Exercise Talent. This Backpack features three Core Attributes.",
+    "core": ""
+   },
+   "Concentrated Company": {
+    "2pc": "10% Weapon Damage",
+    "3pc": "30% Weapon Handling",
+    "4pc": "Camaraderie: Shooting an enemy marks them for 10 seconds. When a marked enemy dies, receive one stack of 3% Weapon Damage and 3% Critical Hit Damage for each Ally or Skill that has contributed to killing that enemy, including yourself. Max Stacks is 35. Stacks decay every 10 seconds. Maximum amount of marks that can be applied is 4.",
+    "Chest": "All for One: Increase the amount of marks that can be applied from 4 to 8.",
+    "Backpack": "One for All: Increase the Weapon Damage bonus per stack from 3% to 6%.",
+    "core": "weapon"
+   },
+   "Negotiator's Dilemma": {
+    "2pc": "15% Critical Hit Chance",
+    "3pc": "20% Critical Hit Damage",
+    "4pc": "Hostile Negotiations: Critical hits mark enemies for 20 seconds, up to 3 marks total. When you critically hit a marked enemy, all other marked enemies take 60% of the damage dealt. Whenever a marked enemy dies, gain 10% critical hit damage, stacking up to 10 times, or until combat ends.",
+    "Chest": "Target Rich Environment: Increase number of marks that can be applied from 3 to 5.",
+    "Backpack": "Critical Measures: Increases Hostile Negotiations damage to additionally marked enemies from 60% to 112%.",
+    "core": ""
+   },
+   "True Patriot": {
+    "2pc": "15% Weapon Handling",
+    "3pc": "30% Magazine Size",
+    "4pc": "Red, White and Blue: Every 2 seconds, enemies you shoot receive a stacking debuff of Red, White and Blue. Red: Amplifies the enemy's damage taken by 15%. White: Shooting the enemy repairs the attacking agent's armor by 2% once every second. Blue: Decreases the enemy's damage dealt by 10%. Full Flag (all debuffs applied): Enemies that die while under the effect of all 3 debuffs create a 5 meter explosion, dealing damage equal to their total health and armor. (Explosion damage reduced on Named enemy deaths.)",
+    "Chest": "Waving the Flag: Reduce rotation speed for debuffs applied by 1 second.",
+    "Backpack": "Patriotic Boost: Red: increase amplified damage from 15% to 30%, from all sources. White: increases armor repair per second for any teammate hitting affected enemy from 2% to 5%. Blue: increases the damage decrease dealt by affected enemy from 10% to 20%.",
+    "core": "armor"
+   },
+   "Hard Wired": {
+    "2pc": "15% Skill Haste",
+    "3pc": "15% Skill Damage · 30% Repair Skills",
+    "4pc": "Feedback Loop: Whenever you use or cancel a skill, your other skill's countdown is automatically reduced by 30 seconds while increasing total skill damage and repair by 10% for 20 seconds. Feedback Loop can occur once every 10 seconds.",
+    "Chest": "Positive Reinforcement: Increases Feedback Loop total skill damage and repair bonus from 10% to 25%.",
+    "Backpack": "Short Circuit: Decreases Feedback Loop cooldown from 10 seconds to 5 seconds.",
+    "core": ""
+   },
+   "System Corruption": {
+    "2pc": "15% Armor on Kill",
+    "3pc": "40% Disrupt Resistance · 40% Pulse Resistance",
+    "4pc": "Hackstep Protocol: Replaces armor kits with an instant, infinite-use ability on a 20 second cooldown. It repairs 20% armor, grants 50% bonus armor and hides your nameplate for 5 seconds. Increases total weapon damage by 2% per 5% bonus armor gained, up to 20%.",
+    "Chest": "Compiler Optimization: Decreases cooldown for Hackstep Protocol from 20 seconds to 15 seconds.",
+    "Backpack": "Multithreaded Execution: Increases bonus armor from Hackstep Protocol from 50% to 100%.",
+    "core": ""
+   },
+   "Virtuoso": {
+    "2pc": "15% Weapon Handling · 15% Magazine Size",
+    "3pc": "15% Weapon Damage",
+    "4pc": "Symphony: Killing an enemy further than 25 meters will provide 40% Weapon Damage to Shotguns, SMG's and Pistols; 20% Weapon Damage to AR's and LMG's; 25% Bonus Armor for 15 seconds. Killing an enemy within 25 meters will provide 40% Weapon Damage to Marksman Rifles, and Rifles; 20% Weapon Damage to AR's and LMG's; 30% Headshot Damage for 15 seconds. Intermittently killing enemies from both ranges will build up stacks. At 4 stacks, all bonuses are multiplied by 2 and triggered at the same time for 15 seconds. No stacks are acquired while these bonuses are active.",
+    "Chest": "Fortissimo: Double the Weapon Damage provided by Symphony.",
+    "Backpack": "Accelerando: Decreases the number of stacks required to activate Symphony double buffs from 4 to 3.",
+    "core": ""
+   },
+   "Cavalier": {
+    "2pc": "30% Hazard Protection",
+    "3pc": "40% Repair Skills",
+    "4pc": "Charging: Charging- For each second spent out of cover, during combat, Agents will get 5% reduced incoming skill damage. Max of 50%. Charged- While fully charged, gain immunity to any movement speed debuff and share this with all of the agent's hazard protection and the incoming skill damage reduction with all allies for 10 seconds. After Charged is consumed, Charging buff will resume if still in combat and out of cover.",
+    "Chest": "Overcharging: Increases the Charging max incoming skill damage reduction from 50% to 70%.",
+    "Backpack": "Safe Charging: Increases the 5% reduction in skill damage to 10%.",
+    "core": ""
+   },
+   "Breaking Point": {
+    "2pc": "30% Rifle Damage · 30% Marksman Rifle Damage",
+    "3pc": "30% Headshot Damage · 30% Weapon Handling",
+    "4pc": "On Point: Hitting a shot with a Rifle or Marksman Rifle grants a stack. Max stack is equal to the weapon's Magazine Size. Reloading will grant 2% Weapon Handling and 4% Weapon Damage per stack, for 20 seconds. No stacks are acquired while the bonuses are active. The timer running out will refill your magazine. Switching weapons while the bonuses are active will stop the effect and refill your magazine. Switching weapons while the bonuses are not active will remove all stacks and refill your magazine.",
+    "Chest": "Point of No Return: Increases On Point bonuses timer from 20 seconds to 40 seconds.",
+    "Backpack": "Point of Honor: Increases On Point weapond damage bonus from 4% to 9% per stack.",
+    "core": ""
+   },
+   "Aces & Eights": {
+    "2pc": "30% Marksman Rifle Damage · 30% Rifle Damage",
+    "3pc": "30% Headshot Damage · 30% Weapon Handling",
+    "4pc": "Dead Man's Hand: Flip a card when landing shots with a Rifle or Marksman Rifle. After 5 cards are flipped, the damage of your next shot is amplified by 75%. More shots are enhanced the better the hand revealed. Four of a Kind: 4 shots. Full House: 3 shots. Aces and Eights: 2 shots. Flip an additional card on headshots.",
+    "Chest": "No Limit: Increases dead Man's Hand amplified damage bonus from 75% to 100%.",
+    "Backpack": "Ace in the Sleeve: Amplifies 1 additional shot once hand is revealed.",
+    "core": ""
+   },
+   "Ortiz: Reficere": {
+    "2pc": "8% Skill Efficiency",
+    "3pc": "60% Repair Skills",
+    "4pc": "Ortiz Rapid Application Nanite Prototype: Decreases Healing Skills' Duration and Range by 90%, while increasing Healing Efficiency by 150%, granting allies 30% Hazard Protection for 10 seconds, once healed.",
+    "Chest": "Overcharged Nanites: Increases Healing Efficiency from 150% to 225%.",
+    "Backpack": "Improved Dampeners: Adjust the range and duration penalty from 90% to 25%.",
+    "core": "skill"
+   },
+   "Tip of the Spear": {
+    "2pc": "20% Signature Weapon Damage",
+    "3pc": "10% Weapon Damage",
+    "4pc": "Aggressive Recon Talent: Killing an enemy with your Signature Weapon grants a 15% Signature Weapon Damage for 10 seconds, and a 25% Reload Speed for the next reload. Automatically regenerate Signature Weapon ammo every 60 seconds.",
+    "Chest": "Specialized Destruction: Increases Aggressive Recon Signature Weapon Damage from 15% to 30%.",
+    "Backpack": "Signature Moves: After fully emptying your Signature Weapon ammo, gain 50% weapon damage for 15 seconds. Double the amount of ammo generated by Aggressive Recon.",
+    "core": ""
+   }
+  },
+  "attrPool": [
+   [
+    "Weapon Handling",
+    8.0
+   ],
+   [
+    "Critical Hit Chance",
+    6.0
+   ],
+   [
+    "Critical Hit Damage",
+    12.0
+   ],
+   [
+    "Headshot Damage",
+    10.0
+   ],
+   [
+    "Armor Regen",
+    4925
+   ],
+   [
+    "Hazard Protection",
+    10.0
+   ],
+   [
+    "Health",
+    18935
+   ],
+   [
+    "Explosive Resistance",
+    10.0
+   ],
+   [
+    "Skill Damage",
+    10.0
+   ],
+   [
+    "Repair Skills",
+    20.0
+   ],
+   [
+    "Skill Haste",
+    12.0
+   ],
+   [
+    "Status Effects",
+    10.0
+   ]
+  ],
+  "cores": {
+   "weapon": [
+    "Weapon Damage",
+    15.0
+   ],
+   "armor": [
+    "Armor",
+    170001
+   ],
+   "skill": [
+    "Skill Tier",
+    1.0
+   ]
+  },
+  "mods": {
+   "Offensive": [
+    [
+     "Critical Hit Chance",
+     6.0
+    ],
+    [
+     "Headshot Damage",
+     9.2
+    ],
+    [
+     "Critical Hit Damage",
+     11.3
+    ]
+   ],
+   "Defensive": [
+    [
+     "Armor on Kill",
+     18935
+    ],
+    [
+     "Incoming Repairs",
+     19.5
+    ],
+    [
+     "Bleed Resistance",
+     10.0
+    ],
+    [
+     "Disorient Resistance",
+     10.0
+    ],
+    [
+     "Burn Resistance",
+     10.0
+    ],
+    [
+     "Blind/Deaf Resistance",
+     10.0
+    ],
+    [
+     "Pulse Resistance",
+     10.0
+    ],
+    [
+     "Disrupt Resistance",
+     10.0
+    ]
+   ],
+   "Utility": [
+    [
+     "Skill Haste",
+     11.8
+    ],
+    [
+     "Skill Duration",
+     9.9
+    ],
+    [
+     "Repair Skills",
+     19.7
+    ]
+   ]
+  },
+  "shd": [
+   [
+    "Offensive",
+    [
+     [
+      "Weapon Damage",
+      0.2
+     ],
+     [
+      "Critical Hit Chance",
+      0.2
+     ],
+     [
+      "Critical Hit Damage",
+      0.4
+     ],
+     [
+      "Headshot Damage",
+      0.4
+     ]
+    ]
+   ],
+   [
+    "Defensive",
+    [
+     [
+      "Total Armor",
+      0.2
+     ],
+     [
+      "Total Health",
+      0.2
+     ],
+     [
+      "Explosive Resistance",
+      0.2
+     ],
+     [
+      "Hazard Protection",
+      0.2
+     ]
+    ]
+   ],
+   [
+    "Utility",
+    [
+     [
+      "Skill Haste",
+      0.2
+     ],
+     [
+      "Repair Skills",
+      0.2
+     ],
+     [
+      "Skill Duration",
+      0.4
+     ],
+     [
+      "Skill Damage",
+      0.2
+     ]
+    ]
+   ],
+   [
+    "Handling",
+    [
+     [
+      "Accuracy",
+      0.2
+     ],
+     [
+      "Stability",
+      0.2
+     ],
+     [
+      "Reload Speed",
+      0.2
+     ],
+     [
+      "Ammo Capacity",
+      0.4
+     ]
+    ]
+   ]
+  ],
+  "specs": {
+   "None": [],
+   "Technician": [
+    [
+     "Skill Tier",
+     1
+    ]
+   ],
+   "Gunner": [
+    [
+     "Magazine Size",
+     10
+    ]
+   ],
+   "Survivalist": [],
+   "Demolitionist": [],
+   "Sharpshooter": [],
+   "Firewall": []
+  },
+  "slots": [
+   [
+    "mask",
+    "Mask",
+    true
+   ],
+   [
+    "chest",
+    "Body Armor",
+    true
+   ],
+   [
+    "backpack",
+    "Backpack",
+    true
+   ],
+   [
+    "gloves",
+    "Gloves",
+    false
+   ],
+   [
+    "holster",
+    "Holster",
+    false
+   ],
+   [
+    "kneepads",
+    "Kneepads",
+    false
+   ]
+  ]
+ }
+}
